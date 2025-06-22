@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body.dark {
+    background-color: #1a202c;
+    color: #ffffff;
+}
+
+body.light {
+    background-color: #f7fafc;
+    color: #1a202c;
+}
+
+pre {
+    white-space: pre-wrap;
+    word-break: break-word;
+}

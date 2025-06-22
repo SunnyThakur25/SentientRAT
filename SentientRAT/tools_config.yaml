@@ -1,0 +1,849 @@
+nmap:
+  install_cmd:
+    linux: "sudo apt-get install nmap -y"
+    windows: "choco install nmap -y"
+  path: "/usr/bin/nmap"
+  command_template: "nmap {flags} {target}"
+  flags:
+    "-sV": "version detection"
+    "-A": "aggressive scan"
+    "-p-": "scan all ports"
+    "--script": "run specific scripts"
+    "-O": "OS detection"
+  output_parser:
+    ports: "(\d+)/tcp\s+open"
+
+gobuster:
+  install_cmd:
+    linux: "sudo apt-get install gobuster -y"
+    windows: "choco install gobuster -y"
+  path: "/usr/bin/gobuster"
+  command_template: "gobuster dir {flags} {target}"
+  flags:
+    "-u": "target URL"
+    "-w": "wordlist path"
+    "-x": "file extension"
+  output_parser:
+    urls: "Found: ([^\s]+)"
+
+burpsuite:
+  install_cmd:
+    linux: "sudo snap install burpsuite"
+    windows: "choco install burpsuite -y"
+  path: "/snap/bin/burpsuite"
+  command_template: "burpsuite {flags}"
+  flags:
+    "-project": "load project file"
+    "-config": "specify configuration file"
+  output_parser:
+    vulnerabilities: "Issue: ([^\n]+)"
+
+sqlmap:
+  install_cmd:
+    linux: "sudo apt-get install sqlmap -y"
+    windows: "choco install sqlmap -y"
+  path: "/usr/bin/sqlmap"
+  command_template: "sqlmap {flags} {target}"
+  flags:
+    "-u": "target URL"
+    "--dbs": "enumerate databases"
+    "--tables": "enumerate tables"
+    "--columns": "enumerate columns"
+    "--dump": "dump database contents"
+  output_parser:
+    databases: "Database: ([^\s]+)"
+
+nikto:
+  install_cmd:
+    linux: "sudo apt-get install nikto -y"
+    windows: "choco install nikto -y"
+  path: "/usr/bin/nikto"
+  command_template: "nikto {flags} {target}"
+  flags:
+    "-h": "target host"
+    "-Tuning": "scan tuning"
+    "-Format": "output format"
+  output_parser:
+    vulnerabilities: "\+ ([^\n]+)"
+
+hydra:
+  install_cmd:
+    linux: "sudo apt-get install hydra -y"
+    windows: "choco install hydra -y"
+  path: "/usr/bin/hydra"
+  command_template: "hydra {flags} {target}"
+  flags:
+    "-l": "login username"
+    "-P": "password list"
+    "-t": "number of parallel connections"
+    "-s": "specify port"
+  output_parser:
+    credentials: "password: ([^\s]+)"
+
+metasploit:
+  install_cmd:
+    linux: "sudo apt-get install metasploit-framework -y"
+    windows: "choco install metasploit"
+  path: "/usr/bin/msfconsole"
+  command_template: "msfconsole -q -x 'use {module}; set {options}; exploit'"
+  flags:
+    "-q": "quiet mode"
+    "-x": "execute command"
+  output_parser:
+    exploits: "Exploit: ([^\n]+)"
+
+nessus:
+  install_cmd:
+    linux: "sudo apt-get install nessus -y"
+    windows: "choco install nessus"
+  path: "/opt/nessus/sbin/nessus"
+  command_template: "nessus {flags} {target}"
+  flags:
+    "-q": "quiet mode"
+    "-x": "export report"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+wireshark:
+  install_cmd:
+    linux: "sudo apt-get install wireshark -y"
+    windows: "choco install wireshark"
+  path: "/usr/bin/wireshark"
+  command_template: "wireshark {flags}"
+  flags:
+    "-r": "read file"
+    "-k": "start capture"
+  output_parser:
+    packets: "Packets: (\d+)"
+
+john:
+  install_cmd:
+    linux: "sudo apt-get install john -y"
+    windows: "choco install john"
+  path: "/usr/bin/john"
+  command_template: "john {flags} {target}"
+  flags:
+    "--wordlist": "specify wordlist"
+    "--rules": "enable rules"
+  output_parser:
+    cracked: "Cracked: ([^\s]+)"
+
+aircrack-ng:
+  install_cmd:
+    linux: "sudo apt-get install aircrack-ng -y"
+    windows: "choco install aircrack-ng"
+  path: "/usr/bin/aircrack-ng"
+  command_template: "aircrack-ng {flags} {target}"
+  flags:
+    "-w": "wordlist"
+    "-b": "BSSID"
+  output_parser:
+    cracked: "KEY FOUND: ([^\s]+)"
+
+mitmproxy:
+  install_cmd:
+    linux: "sudo apt-get install mitmproxy -y"
+    windows: "choco install mitmproxy"
+  path: "/usr/bin/mitmproxy"
+  command_template: "mitmproxy {flags}"
+  flags:
+    "-s": "script file"
+    "-p": "specify port"
+  output_parser:
+    intercepted: "Intercepted: ([^\n]+)"
+
+wpscan:
+  install_cmd:
+    linux: "sudo apt-get install wpscan -y"
+    windows: "choco install wpscan"
+  path: "/usr/bin/wpscan"
+  command_template: "wpscan {flags} {target}"
+  flags:
+    "--url": "target URL"
+    "--enumerate": "enumerate items"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+openvas:
+  install_cmd:
+    linux: "sudo apt-get install openvas -y"
+    windows: "choco install openvas"
+  path: "/usr/bin/openvas"
+  command_template: "openvas {flags} {target}"
+  flags:
+    "-s": "start scan"
+    "-c": "configure scan"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+cobalt strike:
+  install_cmd:
+    linux: "sudo apt-get install cobaltstrike"
+    windows: "choco install cobaltstrike"
+  path: "/usr/bin/cobaltstrike"
+  command_template: "cobaltstrike {flags}"
+  flags:
+    "-server": "server address"
+    "-user": "username"
+  output_parser:
+    sessions: "Session: ([^\n]+)"
+
+netsparker:
+  install_cmd:
+    linux: "sudo apt-get install netsparker -y"
+    windows: "choco install netsparker"
+  path: "/opt/netsparker/netsparker"
+  command_template: "netsparker {flags} {target}"
+  flags:
+    "-t": "target URL"
+    "-o": "output file"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+netsparker:
+  install_cmd:
+    linux: "sudo apt-get install netsparker -y"
+    windows: "choco install netsparker"
+  path: "/opt/netsparker/netsparker"
+  command_template: "netsparker {flags} {target}"
+  flags:
+    "-t": "target URL"
+    "-o": "output file"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+netsparker:
+  install_cmd:
+    linux: "sudo apt-get install netsparker -y"
+    windows: "choco install netsparker"
+  path: "/opt/netsparker/netsparker"
+  command_template: "netsparker {flags} {target}"
+  flags:
+    "-t": "target URL"
+    "-o": "output file"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+recon-ng:
+  install_cmd:
+    linux: "sudo apt-get install recon-ng -y"
+    windows: "choco install recon-ng"
+  path: "/usr/bin/recon-ng"
+  command_template: "recon-ng {flags}"
+  flags:
+    "-w": "workspace name"
+    "-v": "verbose mode"
+  output_parser:
+    findings: "Finding: ([^\n]+)"
+
+theharvester:
+  install_cmd:
+    linux: "sudo apt-get install theharvester -y"
+    windows: "choco install theharvester"
+  path: "/usr/bin/theharvester"
+  command_template: "theharvester {flags} {target}"
+  flags:
+    "-d": "domain"
+    "-b": "data source"
+  output_parser:
+    emails: "Email: ([^\s]+)"
+
+seclist:
+  install_cmd:
+    linux: "sudo apt-get install -y"
+    windows: "choco install seclist"
+  path: "/usr/share/seclist"
+  command_template: "seclist {flags}"
+  flags:
+    "-l": "list available lists"
+    "-g": "generate list"
+  output_parser:
+    lists: "List: ([^\n]+)"
+
+zaproxy:
+  install_cmd:
+    linux: "sudo apt-get install zaproxy -y"
+    windows: "choco install zaproxy"
+  path: "/usr/bin/zaproxy"
+  command_template: "zaproxy {flags}"
+  flags:
+    "-cmd": "command mode"
+    "-config": "specify configuration file"
+  output_parser:
+    alerts: "Alert: ([^\n]+)"
+
+sslyze:
+  install_cmd:
+    linux: "sudo apt-get install sslyze -y"
+    windows: "choco install sslyze"
+  path: "/usr/bin/sslyze"
+  command_template: "sslyze {flags} {target}"
+  flags:
+    "--reneg": "check for renegotiation"
+    "--tlsv1": "check TLSv1"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+subfinder:
+  install_cmd:
+    linux: "sudo apt-get install subfinder -y"
+    windows: "choco install subfinder"
+  path: "/usr/bin/subfinder"
+  command_template: "subfinder {flags} {target}"
+  flags:
+    "-d": "domain"
+    "-o": "output file"
+  output_parser:
+    subdomains: "Subdomain: ([^\s]+)"
+
+masscan:
+  install_cmd:
+    linux: "sudo apt-get install masscan -y"
+    windows: "choco install masscan"
+  path: "/usr/bin/masscan"
+  command_template: "masscan {flags} {target}"
+  flags:
+    "-p": "ports"
+    "--rate": "scan rate"
+  output_parser:
+    ports: "Discovered open port ([^\s]+)"
+
+uniscan:
+  install_cmd:
+    linux: "sudo apt-get install uniscan -y"
+    windows: "choco install uniscan"
+  path: "/usr/bin/uniscan"
+  command_template: "uniscan {flags} {target}"
+  flags:
+    "-u": "target URL"
+    "-q": "quiet mode"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+davtest:
+  install_cmd:
+    linux: "sudo apt-get install davtest -y"
+    windows: "choco install davtest"
+  path: "/usr/bin/davtest"
+  command_template: "davtest {flags} {target}"
+  flags:
+    "-url": "target URL"
+    "-t": "test type"
+  output_parser:
+    results: "Result: ([^\n]+)"
+
+enum4linux:
+  install_cmd:
+    linux: "sudo apt-get install enum4linux -y"
+    windows: "choco install enum4linux"
+  path: "/usr/bin/enum4linux"
+  command_template: "enum4linux {flags} {target}"
+  flags:
+    "-a": "all simple enumeration"
+    "-u": "username"
+    "-p": "password"
+  output_parser:
+    users: "user: ([^\s]+)"
+    shares: "Share: ([^\s]+)"
+
+smbmap:
+  install_cmd:
+    linux: "sudo apt-get install smbmap -y"
+    windows: "choco install smbmap"
+  path: "/usr/bin/smbmap"
+  command_template: "smbmap {flags} {target}"
+  flags:
+    "-u": "username"
+    "-p": "password"
+    "-H": "target host"
+  output_parser:
+    shares: "Share: ([^\s]+)"
+
+smbclient:
+  install_cmd:
+    linux: "sudo apt-get install smbclient -y"
+    windows: "choco install smbclient"
+  path: "/usr/bin/smbclient"
+  command_template: "smbclient {flags} {target}"
+  flags:
+    "-U": "username"
+    "-W": "workgroup"
+    "-c": "command"
+  output_parser:
+    files: "file ([^\s]+)"
+
+snmpwalk:
+  install_cmd:
+    linux: "sudo apt-get install snmp -y"
+    windows: "choco install snmp"
+  path: "/usr/bin/snmpwalk"
+  command_template: "snmpwalk {flags} {target}"
+  flags:
+    "-c": "community string"
+    "-v": "SNMP version"
+  output_parser:
+    data: "([^\s]+) = ([^\s]+)"
+
+snmp-check:
+  install_cmd:
+    linux: "sudo apt-get install snmp-check -y"
+    windows: "choco install snmp-check"
+  path: "/usr/bin/snmp-check"
+  command_template: "snmp-check {flags} {target}"
+  flags:
+    "-t": "timeout"
+    "-c": "community string"
+  output_parser:
+    information: "([^\s]+): ([^\s]+)"
+
+hashcat:
+  install_cmd:
+    linux: "sudo apt-get install hashcat -y"
+    windows: "choco install hashcat"
+  path: "/usr/bin/hashcat"
+  command_template: "hashcat {flags} {hash_file} {wordlist}"
+  flags:
+    "-m": "hash type"
+    "-a": "attack mode"
+    "-o": "output file"
+  output_parser:
+    cracked: "Cracked: ([^\s]+)"
+
+medusa:
+  install_cmd:
+    linux: "sudo apt-get install medusa -y"
+    windows: "choco install medusa"
+  path: "/usr/bin/medusa"
+  command_template: "medusa {flags}"
+  flags:
+    "-h": "target host"
+    "-u": "username"
+    "-P": "password list"
+    "-M": "module"
+  output_parser:
+    credentials: "ACCOUNT FOUND: ([^\n]+)"
+
+patator:
+  install_cmd:
+    linux: "sudo apt-get install patator -y"
+    windows: "choco install patator"
+  path: "/usr/bin/patator"
+  command_template: "patator {flags}"
+  flags:
+    "ftp_login/host=": "target host"
+    "ftp_login/user=": "username"
+    "ftp_login/password=": "password"
+  output_parser:
+    credentials: "login successful ([^\n]+)"
+
+impacket:
+  install_cmd:
+    linux: "sudo apt-get install impacket -y"
+    windows: "choco install impacket"
+  path: "/usr/bin/impacket"
+  command_template: "python {script} {flags}"
+  flags:
+    "-t": "target"
+    "-u": "username"
+    "-p": "password"
+  output_parser:
+    results: "([^\s]+): ([^\s]+)"
+
+gobuster:
+  install_cmd:
+    linux: "sudo apt-get install gobuster -y"
+    windows: "choco install gobuster"
+  path: "/usr/bin/gobuster"
+  command_template: "gobuster {flags} {target}"
+  flags:
+    "dir": "directory/file brute force"
+    "-u": "target URL"
+    "-w": "wordlist"
+    "-x": "file extension"
+  output_parser:
+    found: "Found: ([^\s]+)"
+
+nikto:
+  install_cmd:
+    linux: "sudo apt-get install nikto -y"
+    windows: "choco install nikto"
+  path: "/usr/bin/nikto"
+  command_template: "nikto {flags} {target}"
+  flags:
+    "-h": "target host"
+    "-Tuning": "scan tuning"
+    "-Format": "output format"
+  output_parser:
+    vulnerabilities: "\+ ([^\n]+)"
+
+### Network Analysis and Monitoring
+
+wireshark:
+  install_cmd:
+    linux: "sudo apt-get install wireshark -y"
+    windows: "choco install wireshark"
+  path: "/usr/bin/wireshark"
+  command_template: "wireshark {flags}"
+  flags:
+    "-r": "read capture file"
+    "-k": "start live capture"
+    "-Y": "display filter"
+  output_parser:
+    packets: "Packets: (\d+)"
+    protocols: "Protocol: ([^\s]+)"
+
+tshark:
+  install_cmd:
+    linux: "sudo apt-get install tshark -y"
+    windows: "choco install tshark"
+  path: "/usr/bin/tshark"
+  command_template: "tshark {flags}"
+  flags:
+    "-r": "read capture file"
+    "-w": "write capture file"
+    "-T": "output format"
+  output_parser:
+    packets: "Packets: (\d+)"
+    data: "Data: ([^\n]+)"
+
+tcpdump:
+  install_cmd:
+    linux: "sudo apt-get install tcpdump -y"
+    windows: "choco install tcpdump"
+  path: "/usr/sbin/tcpdump"
+  command_template: "tcpdump {flags}"
+  flags:
+    "-i": "interface"
+    "-w": "write to file"
+    "-r": "read from file"
+  output_parser:
+    packets: "Packets: (\d+)"
+    data: "Data: ([^\n]+)"
+
+### Exploitation Tools
+
+metasploit:
+  install_cmd:
+    linux: "sudo apt-get install metasploit-framework -y"
+    windows: "choco install metasploit"
+  path: "/usr/bin/msfconsole"
+  command_template: "msfconsole -q -x 'use {module}; set {options}; exploit'"
+  flags:
+    "-q": "quiet mode"
+    "-x": "execute command"
+    "-r": "resource file"
+  output_parser:
+    exploits: "Exploit: ([^\n]+)"
+    sessions: "Session ([^\d]+) opened"
+
+empire:
+  install_cmd:
+    linux: "sudo apt-get install empire -y"
+    windows: "choco install empire"
+  path: "/usr/bin/empire"
+  command_template: "empire {flags}"
+  flags:
+    "-p": "project"
+    "-u": "username"
+    "-P": "password"
+  output_parser:
+    agents: "Agent ([^\s]+) connected"
+
+beef:
+  install_cmd:
+    linux: "sudo apt-get install beef-xss -y"
+    windows: "choco install beef"
+  path: "/usr/bin/beef"
+  command_template: "beef {flags}"
+  flags:
+    "-x": "start XSS proxy"
+    "-p": "port"
+  output_parser:
+    hooks: "Hooked ([^\s]+)"
+
+### Forensics and Data Recovery
+
+autopsy:
+  install_cmd:
+    linux: "sudo apt-get install autopsy -y"
+    windows: "choco install autopsy"
+  path: "/usr/bin/autopsy"
+  command_template: "autopsy {flags}"
+  flags:
+    "-c": "configuration file"
+    "-m": "mode"
+  output_parser:
+    findings: "Finding: ([^\s]+)"
+
+sleuthkit:
+  install_cmd:
+    linux: "sudo apt-get install sleuthkit -y"
+    windows: "choco install sleuthkit"
+  path: "/usr/bin/sleuthkit"
+  command_template: "fls {flags} {image}"
+  flags:
+    "-o": "offset"
+    "-p": "print inode"
+  output_parser:
+    files: "File: ([^\s]+)"
+
+binwalk:
+  install_cmd:
+    linux: "sudo apt-get install binwalk -y"
+    windows: "choco install binwalk"
+  path: "/usr/bin/binwalk"
+  command_template: "binwalk {flags} {file}"
+  flags:
+    "-e": "extract files"
+    "-M": "recursive extraction"
+  output_parser:
+    extracted: "Extracted: ([^\s]+)"
+
+### Web Application Security
+
+arachni:
+  install_cmd:
+    linux: "sudo apt-get install arachni -y"
+    windows: "choco install arachni"
+  path: "/usr/bin/arachni"
+  command_template: "arachni {flags} {target}"
+  flags:
+    "--checks": "specify checks"
+    "--report": "generate report"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+w3af:
+  install_cmd:
+    linux: "sudo apt-get install w3af -y"
+    windows: "choco install w3af"
+  path: "/usr/bin/w3af"
+  command_template: "w3af_console {flags}"
+  flags:
+    "-u": "target URL"
+    "-p": "profile"
+  output_parser:
+    vulnerabilities: "Vulnerability: ([^\s]+)"
+
+### Wireless Security
+
+aircrack-ng:
+  install_cmd:
+    linux: "sudo apt-get install aircrack-ng -y"
+    windows: "choco install aircrack-ng"
+  path: "/usr/bin/aircrack-ng"
+  command_template: "aircrack-ng {flags} {file}"
+  flags:
+    "-w": "wordlist"
+    "-b": "BSSID"
+    "-l": "log file"
+  output_parser:
+    key: "KEY FOUND: ([^\s]+)"
+
+kismet:
+  install_cmd:
+    linux: "sudo apt-get install kismet -y"
+    windows: "choco install kismet"
+  path: "/usr/bin/kismet"
+  command_template: "kismet {flags}"
+  flags:
+    "-c": "capture interface"
+    "-s": "server mode"
+  output_parser:
+    networks: "Network: ([^\s]+)"
+
+### Other Advanced Tools
+
+gdb:
+  install_cmd:
+    linux: "sudo apt-get install gdb -y"
+    windows: "choco install gdb"
+  path: "/usr/bin/gdb"
+  command_template: "gdb {flags} {program}"
+  flags:
+    "-ex": "execute command"
+    "-p": "attach to process"
+  output_parser:
+    breakpoints: "Breakpoint ([^\d]+)"
+
+radare2:
+  install_cmd:
+    linux: "sudo apt-get install radare2 -y"
+    windows: "choco install radare2"
+  path: "/usr/bin/radare2"
+  command_template: "r2 {flags} {file}"
+  flags:
+    "-A": "analyze"
+    "-w": "write mode"
+  output_parser:
+    analysis: "Analysis ([^\n]+)"
+
+autopsy:
+  install_cmd:
+    linux: "sudo apt-get install autopsy -y"
+    windows: "choco install autopsy"
+  path: "/usr/bin/autopsy"
+  command_template: "autopsy {flags}"
+  flags:
+    "-c": "configuration file"
+    "-m": "mode (e.g., GUI, CLI)"
+    "-p": "port"
+  output_parser:
+    findings: "Finding: ([^\s]+)"
+    artifacts: "Artifact: ([^\s]+)"
+
+sleuthkit:
+  install_cmd:
+    linux: "sudo apt-get install sleuthkit -y"
+    windows: "choco install sleuthkit"
+  path: "/usr/bin/sleuthkit"
+  command_template: "fls {flags} {image}"
+  flags:
+    "-o": "offset"
+    "-p": "print inode"
+    "-r": "recursive"
+  output_parser:
+    files: "File: ([^\s]+)"
+    inodes: "Inode: ([^\d]+)"
+
+binwalk:
+  install_cmd:
+    linux: "sudo apt-get install binwalk -y"
+    windows: "choco install binwalk"
+  path: "/usr/bin/binwalk"
+  command_template: "binwalk {flags} {file}"
+  flags:
+    "-e": "extract files"
+    "-M": "recursive extraction"
+    "-A": "analyze file"
+  output_parser:
+    extracted: "Extracted: ([^\s]+)"
+    analysis: "Analysis: ([^\s]+)"
+
+volatility:
+  install_cmd:
+    linux: "sudo pip install volatility3"
+    windows: "pip install volatility3"
+  path: "/usr/local/bin/vol.py"
+  command_template: "vol.py {flags} {image}"
+  flags:
+    "-f": "image file"
+    "--profile": "profile name"
+    "pslist": "list processes"
+  output_parser:
+    processes: "PID: ([^\s]+)"
+    modules: "Module: ([^\s]+)"
+
+bulk_extractor:
+  install_cmd:
+    linux: "sudo apt-get install bulk_extractor -y"
+    windows: "choco install bulk-extractor"
+  path: "/usr/bin/bulk_extractor"
+  command_template: "bulk_extractor {flags} {input}"
+  flags:
+    "-o": "output directory"
+    "-R": "recursive"
+    "-S": "size limit"
+  output_parser:
+    extracted: "Extracted: ([^\s]+)"
+
+ghidra:
+  install_cmd:
+    linux: "sudo apt-get install ghidra -y"
+    windows: "choco install ghidra"
+  path: "/usr/local/bin/ghidra"
+  command_template: "ghidra {flags}"
+  flags:
+    "-project": "project file"
+    "-import": "import file"
+    "-script": "run script"
+  output_parser:
+    functions: "Function: ([^\s]+)"
+    strings: "String: ([^\s]+)"
+
+radare2:
+  install_cmd:
+    linux: "sudo apt-get install radare2 -y"
+    windows: "choco install radare2"
+  path: "/usr/bin/radare2"
+  command_template: "r2 {flags} {file}"
+  flags:
+    "-A": "analyze"
+    "-w": "write mode"
+    "-d": "debug"
+  output_parser:
+    analysis: "Analysis ([^\n]+)"
+    functions: "Function: ([^\s]+)"
+
+ollydbg:
+  install_cmd:
+    windows: "choco install ollydbg"
+  path: "C:\\Program Files\\OllyDbg\\ollydbg.exe"
+  command_template: "ollydbg {flags} {file}"
+  flags:
+    "-r": "run"
+    "-s": "step"
+  output_parser:
+    breakpoints: "Breakpoint ([^\d]+)"
+    instructions: "Instruction: ([^\s]+)"
+
+idapro:
+  install_cmd:
+    windows: "choco install ida-pro"
+  path: "C:\\Program Files\\IDA Pro\\ida64.exe"
+  command_template: "ida64 {flags} {file}"
+  flags:
+    "-A": "analyze"
+    "-S": "run script"
+  output_parser:
+    functions: "Function: ([^\s]+)"
+    strings: "String: ([^\s]+)"
+
+x64dbg:
+  install_cmd:
+    windows: "choco install x64dbg"
+  path: "C:\\Program Files\\x64dbg\\x32\\x32dbg.exe"
+  command_template: "x32dbg {flags} {file}"
+  flags:
+    "-r": "run"
+    "-s": "step"
+    "-b": "breakpoint"
+  output_parser:
+    breakpoints: "Breakpoint ([^\d]+)"
+    instructions: "Instruction: ([^\s]+)"
+
+mimikatz:
+  install_cmd:
+    linux: "sudo apt-get install mimikatz -y"
+    windows: "choco install mimikatz"
+  path: "/usr/bin/mimikatz.exe"
+  command_template: "mimikatz {flags}"
+  flags:
+    "privilege::debug": "enable debug privileges"
+    "sekurlsa::logonpasswords": "logon passwords"
+  output_parser:
+    credentials: "Credentials ([^\s]+)"
+
+dotnet_reflector:
+  install_cmd:
+    windows: "choco install dotnet-reflector"
+  path: "C:\\Program Files\\Red Gate\\.NET Reflector\\Reflector.exe"
+  command_template: "reflector {flags} {file}"
+  flags:
+    "-r": "run"
+    "-s": "save"
+  output_parser:
+    classes: "Class: ([^\s]+)"
+    methods: "Method: ([^\s]+)"
+
+yara:
+  install_cmd:
+    linux: "sudo apt-get install yara -y"
+    windows: "choco install yara"
+  path: "/usr/bin/yara"
+  command_template: "yara {flags} {rule} {target}"
+  flags:
+    "-r": "recursive"
+    "-f": "fast mode"
+  output_parser:
+    matches: "Match: ([^\s]+)"

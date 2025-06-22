@@ -1,0 +1,14 @@
+{
+  "name": "sentientrat-gui",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "echo 'Building React app...' && cp src/*.jsx dist/",
+    "start": "echo 'Starting dev server not implemented'"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tailwindcss": "^2.2.19",
+    "framer-motion": "^10.12.16"
+  }
+}
